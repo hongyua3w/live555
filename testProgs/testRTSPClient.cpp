@@ -480,6 +480,8 @@ DummySink::DummySink(UsageEnvironment& env, MediaSubsession& subsession, char co
   : MediaSink(env),
     fSubsession(subsession) {
   fStreamId = strDup(streamId);
+  // lianghongyu20160829: 无符号u int8_t固定宽度整形,参考types.h　typedef int int##N##_t __attribute__ ((__mode__ (MODE)))
+  // 用宏替换后其实是typedef int int8_t __attribute__ ((__mode__ (__QI__)))　__QI__就代表最小寻址单元，一个字节，8位
   fReceiveBuffer = new u_int8_t[DUMMY_SINK_RECEIVE_BUFFER_SIZE];
 }
 
